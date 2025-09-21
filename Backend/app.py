@@ -58,7 +58,9 @@ def submit_resume():
 @app.route("/course_suggestions", methods=["POST"])
 def course_suggestions():
     try:
-        user_input = request.json.get("query", "Suggest me some courses")
+        data = request.json
+        query = f"I have this {data.get("skill")} And I want to get this Job {data.get("JD")}. Suggest me some courses that can help me get this job."
+        user_input = request.json.get("query", query)
         flow_id = "baa053aa-6038-43f9-8707-f46e2ee2ff20"  # your flow
         url = f"http://localhost:7860/api/v1/run/{flow_id}?stream=false"
         headers = {
@@ -83,7 +85,9 @@ def course_suggestions():
 @app.route("/job_search", methods=["POST"])
 def job_search():
     try:
-        user_input = request.json.get("query", "Find me some jobs")
+        data = request.json
+        query = f"I have this {data.get("skill")} And I want to purse career in {data.get("career_path")}. Suggest me some job posting."
+        user_input = request.json.get("query", query)
         flow_id = "c842e250-da8e-45e4-9614-5748c1646a31"  # job search flow
         url = f"http://localhost:7860/api/v1/run/{flow_id}?stream=false"
 
