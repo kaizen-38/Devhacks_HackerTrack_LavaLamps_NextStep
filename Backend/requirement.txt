@@ -4,3 +4,5 @@ PyPDF2
 spacy
 python-dateutil
 torch
+flask_cors
+google-generativeai
