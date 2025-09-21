@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 // MODIFICATION: Import useNavigate
-import { useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import { User, BookOpen, Briefcase, Award, Plus, Trash2, ArrowRight, ChevronLeft, X } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -73,6 +73,7 @@ const UserStep = ({ data, setData, nextStep }: any) => {
         <div className="space-y-6 animate-fade-in-up">
             <div className="grid sm:grid-cols-2 gap-6">
                 <FormInput id="first_name" label="First Name" placeholder="Jane" value={data.user.first_name || ''} onChange={handleChange} required />
+                <FormInput id="middle_name" label="Middle Name" placeholder="Doe" value={data.user.middle_name || ''} onChange={handleChange} required />
                 <FormInput id="last_name" label="Last Name" placeholder="Doe" value={data.user.last_name || ''} onChange={handleChange} required />
             </div>
              <div className="grid sm:grid-cols-2 gap-6">
@@ -273,15 +274,20 @@ function InputFormPage() {
         document.title = 'NextStep | Complete Your Profile';
     }, []);
 
+    const data = JSON.parse(JSON.parse(useLocation().state).data);
+    //const data = useLocation().state
+    console.log(data)
+
+
     const navigate = useNavigate();
 
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
-        user: {},
-        education: [{}],
-        experience: [{}],
-        skills: [],
-        certifications: []
+        user: {first_name : data.first_name, middle_name: data.middle_name, last_name : data.last_name, email : data.email, contact_no: data.contact_no},
+        education: data.education || [{}],
+        experience: data.experience || [{}],
+        skills: data.skills || [],
+        certifications: data.certifications || [],
     });
 
     const nextStep = () => setStep(prev => prev + 1);
