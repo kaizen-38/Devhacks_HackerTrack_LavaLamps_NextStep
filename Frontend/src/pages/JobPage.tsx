@@ -32,9 +32,13 @@ const jobData = {
 function JobPage() {
     const { jobId } = useParams(); // In a real app, you would use this ID to fetch data
 
+
     useEffect(() => {
         document.title = `NextStep | ${jobData.title}`;
         window.scrollTo(0, 0);
+
+
+
     }, []);
 
     return (

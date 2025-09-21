@@ -6,6 +6,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import { User, BookOpen, Briefcase, Award, Plus, Trash2, ArrowRight, ChevronLeft, X } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import axios from "axios";
 
 // --- Reusable Input Component ---
 const FormInput = ({ id, label, type = 'text', placeholder, value, onChange, required = false }: any) => (
@@ -295,6 +296,8 @@ function InputFormPage() {
     
     const submitForm = () => {
         console.log("Final Form Data:", JSON.stringify(formData, null, 2));
+        axios.post("http://127.0.0.1:5000/submit_resume",formData)
+            .then(res => console.log(res))
         navigate('/career-path', { state: { formData } });
     };
 

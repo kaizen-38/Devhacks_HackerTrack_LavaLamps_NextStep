@@ -126,13 +126,13 @@ function HomePage() {
                 className={`
                   w-full sm:w-auto group relative overflow-hidden bg-black text-white rounded-2xl font-bold
                   transition-all duration-500 hover:scale-105 hover:shadow-2xl
-                  ${!file && !resData && 'opacity-50 cursor-not-allowed'}
+                  ${(!file || !resData) && 'opacity-50 cursor-not-allowed'}
                   px-8 py-4 text-base md:px-10 md:py-5 md:text-lg
                 `}
                 disabled={resData == null}
               >
                 <div className="relative flex items-center justify-center space-x-3">
-                  <span>Continue with Resume</span>
+                  <span>{!resData && file ? "Analyzing" : "Continue with Resume"}</span>
                   <ArrowRight className="w-6 h-6 transform transition-transform duration-300 group-hover:translate-x-2" />
                 </div>
               </button>

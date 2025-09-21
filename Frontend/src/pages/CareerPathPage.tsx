@@ -1,10 +1,11 @@
 // FILE: src/pages/CareerPathPage.tsx
 
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { Briefcase, Zap } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import axios from "axios";
 
 // --- Mock Data (replace with API calls later) ---
 const relevantJobs = [
@@ -32,6 +33,7 @@ const CircularProgress = ({ score }: { score: number }) => {
     const radius = 50;
     const circumference = 2 * Math.PI * radius;
     const offset = circumference - (score / 100) * circumference;
+
 
     return (
         <div className="relative w-32 h-32">
@@ -69,6 +71,26 @@ function CareerPathPage() {
     const { formData } = location.state || { formData: { user: { first_name: 'User'}, skills: ['Sample Skill'] } };
     const userSkills = formData.skills || [];
     const compatibilityScore = relevantJobs[0].score;
+    const [jobsData,setJobsData] = useState(relevantJobs);
+    const [resourcesData,setResourcesData] = useState(recommendedCourses);
+
+    useEffect(() => {
+        axios.post("http://127.0.0.1:5000/course_suggestions",{user: "demo"})
+            .then(res => {
+                console.log(res)
+                setResourcesData(res.data);
+            })
+
+        axios.post("http://127.0.0.1:5000/job_search",{user: "demo"})
+            .then(res => {
+                console.log(res)
+                setJobsData(res.data);
+            })
+
+
+
+    }, []);
+
 
     return (
         <div className="min-h-screen bg-white text-black flex flex-col">
@@ -101,7 +123,7 @@ function CareerPathPage() {
                             <div>
                                 <h2 className="text-3xl font-bold text-black mb-6 flex items-center"><Briefcase className="w-8 h-8 mr-3" /> Relevant Jobs</h2>
                                 <div className="space-y-6">
-                                    {relevantJobs.map((job, index) => (
+                                    {jobsData.map((job, index) => (
                                         <div key={index} className="backdrop-blur-xl bg-white/60 border border-black/10 rounded-3xl p-6 shadow-lg space-y-4">
                                             <div className="flex flex-col sm:flex-row items-center gap-6">
                                                 <div className="flex-shrink-0">
@@ -142,7 +164,7 @@ function CareerPathPage() {
                             <div>
                                 <h2 className="text-3xl font-bold text-black mb-6 flex items-center"><Zap className="w-8 h-8 mr-3" /> Recommended Courses</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                    {recommendedCourses.map((course, index) => (
+                                    {resourcesData.map((course, index) => (
                                         <a href="#" key={index} className="backdrop-blur-xl bg-white/60 border border-black/10 rounded-3xl shadow-lg overflow-hidden group block hover:scale-105 hover:shadow-2xl transition-all duration-300">
                                             <img src={course.thumbnail} alt={course.title} className="w-full h-48 object-cover" />
                                             <div className="p-5">

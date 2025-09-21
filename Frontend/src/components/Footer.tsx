@@ -5,6 +5,12 @@ import { Github, Twitter, Linkedin } from 'lucide-react';
 import logo from '../assets/logo.png'; // <-- 1. Import your logo
 
 function Footer() {
+
+    const getURLMap = (path: string) => {
+        if (path == "Home") return "/"
+        else return "#"
+    }
+
   return (
     <footer className="relative bg-white border-t border-black/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -36,7 +42,7 @@ function Footer() {
             <ul className="space-y-3">
               {['Home', 'How it Works', 'About Us'].map((item) => (
                 <li key={item}>
-                  <a href="#" className="text-black/70 hover:text-black transition-colors duration-300 relative group">
+                  <a href={getURLMap(item)} className="text-black/70 hover:text-black transition-colors duration-300 relative group">
                     {item}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
                   </a>

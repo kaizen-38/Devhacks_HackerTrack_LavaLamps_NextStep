@@ -24,10 +24,12 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route("/", methods=["GET"])
+@cross_origin()
 def home():
     return render_template("index.html")
 
 @app.route("/upload", methods=["POST"])
+@cross_origin()
 def upload_resume():
     if "resume" not in request.files:
         return jsonify({"error": "No resume uploaded"}), 400
@@ -45,6 +47,7 @@ def upload_resume():
     return jsonify(data)
 
 @app.route("/submit_resume", methods=["POST"])
+@cross_origin()
 def submit_resume():
     data = request.json
     career_path = data.get("career_path")
@@ -60,6 +63,7 @@ def submit_resume():
     return jsonify({"message": "Resume successfully inserted", "career_path": career_path})
 
 @app.route("/course_suggestions", methods=["POST"])
+@cross_origin()
 def course_suggestions():
     try:
         user_input = request.json.get("query", "Suggest me some courses")
@@ -85,6 +89,7 @@ def course_suggestions():
         return jsonify({"error": str(e)}), 500
 
 @app.route("/job_search", methods=["POST"])
+@cross_origin()
 def job_search():
     try:
         user_input = request.json.get("query", "Find me some jobs")

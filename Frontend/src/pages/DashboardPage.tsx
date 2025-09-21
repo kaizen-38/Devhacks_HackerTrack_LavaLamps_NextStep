@@ -1,10 +1,11 @@
 // FILE: src/pages/DashboardPage.tsx
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import { Edit2, MapPin, Linkedin, X } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import axios from "axios";
 
 // --- Mock Data ---
 const initialUserData = {
@@ -89,7 +90,7 @@ const StreakCalendar = ({ data }: { data: Map<string, { activityLevel: number }>
             <div className="flex gap-3">
                 <div className="grid grid-rows-7 gap-1 text-xs text-black/50 mt-6 shrink-0">
                     {weekDays.map((day, i) => (
-                        <span key={day} className={`h-3.5 flex items-center ${i % 2 === 0 ? 'invisible' : ''}`}>{day}</span>
+                        <span key={day+Date().toString()} className={`h-3.5 flex items-center ${i % 2 === 0 ? 'invisible' : ''}`}>{day}</span>
                     ))}
                 </div>
                 <div className="overflow-x-auto pb-2 w-full">
@@ -189,11 +190,28 @@ function DashboardPage() {
     useEffect(() => {
         document.title = 'NextStep | Dashboard';
         window.scrollTo(0, 0);
+        axios.post("http://127.0.0.1:5000/course_suggestions",{user: "demo"})
+            .then(res => {
+                console.log(res)
+                setResourcesData(res.data);
+            })
+
+        const { formData } = location.state || { formData: { user: { first_name: 'User'}, skills: ['Sample Skill'] } };
+
+        if (formData.user.first_name != null && formData.user.first_name != "" && formData.user.first_name != 'User') {
+            console.log(formData)
+            setUserData(formData);
+        }
     }, []);
+
+
     
     // MODIFICATION: User data is now in state
     const [userData, setUserData] = useState(initialUserData);
     const [isEditing, setIsEditing] = useState(false);
+    const [resourcesData,setResourcesData] = useState(userCourses);
+    const location = useLocation();
+
 
     return (
         <>
@@ -236,7 +254,7 @@ function DashboardPage() {
                                     <div>
                                         <h2 className="text-3xl font-bold text-black mb-6">Your Courses</h2>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-                                            {userCourses.map((course, index) => (
+                                            {resourcesData.map((course, index) => (
                                                 <CourseCard key={index} course={course} />
                                             ))}
                                         </div>
