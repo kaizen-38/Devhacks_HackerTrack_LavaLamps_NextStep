@@ -1,0 +1,94 @@
+```json
+{
+  "first_name": "KRISH",
+  "middle_name": null,
+  "last_name": "PATEL",
+  "contact_no": "9687577521",
+  "email": "p.krish2204@gmail.com",
+  "education": [
+    {
+      "university": "Arizona State University",
+      "degree": "Master of Science",
+      "major": "Computer Science",
+      "cgpa": null,
+      "scale": null,
+      "minor": null,
+      "graduation_date": "Fall 2025"
+    },
+    {
+      "university": "Pandit Deendayal Energy University",
+      "degree": "Bachelor of technology",
+      "major": "ICT",
+      "cgpa": 9.24,
+      "scale": null,
+      "minor": null,
+      "graduation_date": "May 2025"
+    },
+    {
+      "university": "Ranchhodlal Chhotalal Technical Institute",
+      "degree": "Diploma",
+      "major": "Computer Engineering",
+      "cgpa": 9.5,
+      "scale": null,
+      "minor": null,
+      "graduation_date": "May 2022"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Encode",
+      "position": "Event Management Head",
+      "description": "• Led planning and execution of multiple student events with 50+ attendees .\n• Designed social media posts and flyers using Canva, ensuring alignment with  organizations branding\nguidelines.\n• Promoted events across Instagram and WhatsApp, increasing participation and student visibility.\n• Managed event logistics, venue booking, and communication with student teams and faculty.\n• Mentored subcommittee members and delegated tasks to ensure smooth event delivery",
+      "start_date": "Jul 2023",
+      "end_date": "May 2024"
+    },
+    {
+      "company": "Encode",
+      "position": "Subcommittee Member",
+      "description": "• Supported logistics, registration, and internal documentation for events .\n• Handled student inquiries and coordinated schedules for volunteers .",
+      "start_date": "Jul 2022",
+      "end_date": "June 2023"
+    },
+    {
+      "company": "Blink Analytics",
+      "position": "Data Science and LLM intern",
+      "description": "• Prepared and cleaned large datasets for training AI models.\n• Assisted with social media scheduling, on -site logistics, and participant coordination\n• Supported generative AI projects through backend optimization and documentation.",
+      "start_date": "Dec 2024",
+      "end_date": "April 2025"
+    },
+    {
+      "company": "Neurapses Technologies",
+      "position": "ML Summer Internship",
+      "description": "• Built a structured medical database using web -scraping and integrated it with an AI -based chatbot.\n• Assisted with organizing research results and testing system accuracy.",
+      "start_date": "May2024",
+      "end_date": "July 2024"
+    },
+    {
+      "company": "Everest Instruments",
+      "position": "SDE Internship",
+      "description": "• Participated in the development of web -based applications using Java.\n• Gained hands -on experience in software design, user interface support, and internal documentation.",
+      "start_date": "May202 2",
+      "end_date": "July 202 2"
+    }
+  ],
+  "skills": [
+    "Creative Writing & Captioning",
+    "Event planning, scheduling, and coordination",
+    "Social Media Platforms: Instagram, LinkedIn",
+    "Content Creation: Canva",
+    "Email handling, phone etiquette, and professional correspondence",
+    "Team collaboration and multitasking under deadlines",
+    "Programming: Python, Java, HTML, CSS, JavaScript, SQL",
+    "Web Development: Django, React, Streamlit",
+    "Tools & Platforms: Git, MS Office Suite, Streamlit, Docker",
+    "Data Science: Machine Learning, Artificial intelligence, Deep Learning, Generative AI, LLMs",
+    "Excellent written communication and documentation skills",
+    "Comfortable organizing data and managing spreadsheets",
+    "Strong time management and problem -solving abilities"
+  ],
+  "certifications": [
+    "Secured elite certification with a silver medal in ’Ethical Hacking’ from NPTEL.",
+    "Completed a training in “ Fine-tuning LLMs ” at Blink Analytics."
+  ]
+}
+```

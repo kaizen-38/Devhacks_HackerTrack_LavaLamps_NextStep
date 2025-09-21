@@ -1,0 +1,38 @@
+
+User Model Schema for Neo4j AuraDB
+---------------------------------
+
+User Node:
+- first_name : String
+- middle_name : String (Optional)
+- last_name : String
+- contact_no : Numeric
+- email : String (Unique)
+
+Relationships:
+(User)-[:HAS_EDUCATION]->(Education)
+(User)-[:HAS_EXPERIENCE]->(Experience)
+(User)-[:HAS_SKILL]->(Skill)
+(User)-[:HAS_CERTIFICATION]->(Certification)
+
+Education Node:
+- university : String
+- degree : String
+- major : String
+- cgpa : Float (Optional)
+- scale : Float
+- minor : List[String] (Optional)
+- graduation_date : Date
+
+Experience Node:
+- company : String
+- position : String
+- description : String
+- start_date : Date
+- end_date : Date (Optional, could be current)
+
+Skill Node:
+- name : String
+
+Certification Node:
+- name : String
