@@ -35,12 +35,6 @@ def upload_resume():
 
     # Parse resume
     data = parse_resume(file_path)
-
-    # data["education"] = data.get("education", [])
-    # data["experience"] = data.get("experience", [])
-    # data["skills"] = data.get("skills", [])
-    # data["certifications"] = data.get("certifications", [])
-    print(data)
     # Store in Neo4j using the correct method
     neo4j.insert_resume(data)
 
