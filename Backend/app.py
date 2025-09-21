@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify, render_template
 from parser.extractor import parse_resume
+from flask_cors import CORS, cross_origin
 from neo4j_handler import Neo4jHandler
 import os
-from dotenv import load_dotenv 
+from dotenv import load_dotenv
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 
@@ -17,6 +18,9 @@ neo4j = Neo4jHandler(
 
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route("/", methods=["GET"])
 def home():

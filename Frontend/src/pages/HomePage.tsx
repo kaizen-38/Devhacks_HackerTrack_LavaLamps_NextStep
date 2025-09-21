@@ -1,14 +1,16 @@
 // FILE: src/pages/HomePage.tsx
 
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { UploadCloud, File, X, ArrowRight } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import axios from "axios";
 
 function HomePage() {
   const [file, setFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [resData,setResData] = useState(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,6 +18,12 @@ function HomePage() {
       setFile(e.target.files[0]);
     }
   };
+
+    useEffect(() => {
+        if (file != null) {
+            submitResume()
+        }
+    }, [file]);
 
   const handleDragEvents = (e: React.DragEvent<HTMLDivElement>, dragState: boolean) => {
     e.preventDefault();
@@ -37,6 +45,19 @@ function HomePage() {
   const removeFile = () => {
     setFile(null);
   };
+
+  const submitResume = () => {
+      const fd = new FormData();
+      fd.append("resume", file ?? "");
+
+      // @ts-ignore
+      axios.post("http://127.0.0.1:5000/upload", fd)
+          .then(res => res)
+          .then(data =>{
+              console.log(data);
+              setResData(data);
+          });
+  }
 
   return (
     <div className="min-h-screen bg-white text-black flex flex-col">
@@ -97,15 +118,18 @@ function HomePage() {
 
           {/* MODIFICATION: Restructured the CTA section */}
           <div className="mt-8 flex flex-col items-center">
-            <Link to={file ? "/input-form" : "#"} className="w-full sm:w-auto">
+            <Link state={JSON.stringify(resData)} to={{
+                pathname: "/input-form",
+                state: resData
+            }} className="w-full sm:w-auto">
               <button 
                 className={`
                   w-full sm:w-auto group relative overflow-hidden bg-black text-white rounded-2xl font-bold
                   transition-all duration-500 hover:scale-105 hover:shadow-2xl
-                  ${!file && 'opacity-50 cursor-not-allowed'}
+                  ${!file && !resData && 'opacity-50 cursor-not-allowed'}
                   px-8 py-4 text-base md:px-10 md:py-5 md:text-lg
                 `}
-                disabled={!file}
+                disabled={resData == null}
               >
                 <div className="relative flex items-center justify-center space-x-3">
                   <span>Continue with Resume</span>
