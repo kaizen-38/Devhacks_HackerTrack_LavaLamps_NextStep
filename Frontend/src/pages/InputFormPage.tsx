@@ -1,6 +1,8 @@
 // FILE: src/pages/InputFormPage.tsx
 
 import React, { useState, useEffect } from 'react';
+// MODIFICATION: Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import { User, BookOpen, Briefcase, Award, Plus, Trash2, ArrowRight, ChevronLeft, X } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -77,7 +79,6 @@ const UserStep = ({ data, setData, nextStep }: any) => {
                 <FormInput id="email" label="Email" type="email" placeholder="jane.doe@email.com" value={data.user.email || ''} onChange={handleChange} required />
                 <FormInput id="contact_no" label="Contact Number" type="tel" placeholder="123-456-7890" value={data.user.contact_no || ''} onChange={handleChange} required />
             </div>
-            {/* MODIFICATION: Added Domain Specialization dropdown */}
             <div>
                 <label htmlFor="domain" className="block text-sm font-bold text-black mb-2">
                     Domain Specialization <span className="text-red-500">*</span>
@@ -272,6 +273,8 @@ function InputFormPage() {
         document.title = 'NextStep | Complete Your Profile';
     }, []);
 
+    const navigate = useNavigate();
+
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         user: {},
@@ -286,7 +289,7 @@ function InputFormPage() {
     
     const submitForm = () => {
         console.log("Final Form Data:", JSON.stringify(formData, null, 2));
-        alert("Roadmap generated! (Check browser console for the complete data object)");
+        navigate('/career-path', { state: { formData } });
     };
 
     const steps = [
