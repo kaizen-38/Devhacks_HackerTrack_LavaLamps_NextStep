@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { Github, Twitter, Linkedin } from 'lucide-react';
-import logo from '../assets/logo.png'; // <-- 1. Import your logo
+import logo from '../assets/logo.png';
+import {Link} from "react-router-dom"; // <-- 1. Import your logo
 
 function Footer() {
 
@@ -76,9 +77,11 @@ function Footer() {
                 placeholder="Enter your email" 
                 className="flex-1 px-4 py-3 backdrop-blur-sm bg-black/5 border border-black/20 rounded-l-2xl focus:outline-none focus:border-black/40 transition-all duration-300"
               />
-              <button className="bg-black text-white px-6 py-3 rounded-r-2xl hover:bg-black/80 transition-all duration-300 font-semibold">
-                Subscribe
-              </button>
+             <Link to="/subscribe">
+                 <button className="bg-black text-white px-6 py-3 rounded-r-2xl hover:bg-black/80 transition-all duration-300 font-semibold">
+                     Subscribe
+                 </button>
+             </Link>
             </div>
           </div>
         </div>
