@@ -12,6 +12,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import JobPage from './pages/JobPage';
 import DashboardPage from './pages/DashboardPage';
 import PomodoroPage from './pages/PomodoroPage';
+import EmailSubscribe from './pages/EmailSubscribe'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/job/:jobId" element={<JobPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/pomodoro" element={<PomodoroPage />} />
+          <Route path="/subscribe" element={<EmailSubscribe />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

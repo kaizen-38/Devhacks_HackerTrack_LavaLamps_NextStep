@@ -133,6 +133,7 @@ const EducationStep = ({ data, setData, nextStep, prevStep }: any) => {
         setData({ ...data, education: updatedEducation });
     };
 
+    console.log(data.education);
     return (
         <div className="space-y-8 animate-fade-in-up">
             {data.education.map((edu: any, index: number) => (
@@ -301,8 +302,22 @@ function InputFormPage() {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         user: {first_name : data.first_name || "", middle_name: data.middle_name || "", last_name : data.last_name || "", email : data.email || "", contact_no: data.contact_no || ""},
-        education: data.education || [{}],
-        experience: data.experience || [{}],
+        education: data.education[0] == undefined  ? [{
+            university: "Arizona State University",
+            degree: "Master of Science",
+            major: "Computer Science",
+            cgpa: null,
+            scale: null,
+            minor: null,
+            graduation_date: "Fall 2025"
+        }] : data.education,
+        experience: data.experience[0] == undefined  ? [{
+            company: "Encode",
+            position: "Event Management Head",
+            description: "• Led planning and execution of multiple student events with 50+ attendees .\n• Designed social media posts and flyers using Canva, ensuring alignment with  organizations branding\nguidelines.\n• Promoted events across Instagram and WhatsApp, increasing participation and student visibility.\n• Managed event logistics, venue booking, and communication with student teams and faculty.\n• Mentored subcommittee members and delegated tasks to ensure smooth event delivery",
+            start_date: "Jul 2023",
+            end_date: "May 2024"
+        }] : data.experience,
         skills: data.skills || [],
         certifications: data.certifications || [],
     });
