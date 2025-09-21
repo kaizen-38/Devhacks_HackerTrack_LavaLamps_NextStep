@@ -1,13 +1,11 @@
-// FILE: src/components/Header.tsx
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import logo from '../assets/logo.png'; // Assuming logo is in src/assets
 
-// MODIFICATION: Removed 'Home' link
 const navLinks = [
     { name: 'Dashboard', path: '/dashboard' },
+    { name: 'Pomodoro', path: '/pomodoro' }, // MODIFICATION: Added Pomodoro link
     { name: 'About Us', path: '/about-us' },
 ];
 
@@ -77,4 +75,3 @@ function Header() {
 }
 
 export default Header;
-
