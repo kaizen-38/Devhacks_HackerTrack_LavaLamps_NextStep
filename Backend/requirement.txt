@@ -1,0 +1,6 @@
+flask
+neo4j
+PyPDF2
+spacy
+python-dateutil
+torch
