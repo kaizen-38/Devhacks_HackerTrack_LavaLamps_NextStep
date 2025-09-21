@@ -95,7 +95,7 @@ def course_suggestions():
 def job_search():
     try:
         data = request.json
-        query = f"I have this {data.get("skill")} And I want to purse career in {data.get("career_path")}. Suggest me some job posting."
+        query = f"I have this {data.get("skill")} And I want to pursue career in {data.get("career_path")}. Suggest me some job posting."
         user_input = request.json.get("query", query)
         flow_id = "c842e250-da8e-45e4-9614-5748c1646a31"  # job search flow
         url = f"http://localhost:7860/api/v1/run/{flow_id}?stream=false"

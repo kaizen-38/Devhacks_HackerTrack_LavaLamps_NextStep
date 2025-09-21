@@ -75,13 +75,13 @@ function CareerPathPage() {
     const [resourcesData,setResourcesData] = useState(recommendedCourses);
 
     useEffect(() => {
-        axios.post("http://127.0.0.1:5000/course_suggestions",{user: "demo"})
+        axios.post("http://127.0.0.1:5000/course_suggestions",{user: "demo", skills: formData.skills, career_path: formData.career_path})
             .then(res => {
                 console.log(res)
                 setResourcesData(res.data);
             })
 
-        axios.post("http://127.0.0.1:5000/job_search",{user: "demo"})
+        axios.post("http://127.0.0.1:5000/job_search",{user: "demo", skills: formData.skills, career_path: formData.career_path})
             .then(res => {
                 console.log(res)
                 setJobsData(res.data);

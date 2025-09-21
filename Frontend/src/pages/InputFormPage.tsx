@@ -275,16 +275,32 @@ function InputFormPage() {
         document.title = 'NextStep | Complete Your Profile';
     }, []);
 
-    const data = JSON.parse(JSON.parse(useLocation().state).data);
-    //const data = useLocation().state
-    console.log(data)
+    let data = {
+        first_name: "",
+        middle_name: "",
+        last_name: "",
+        email: "",
+        contact_no: "",
+        education: {},
+        experience: {},
+        skills: [],
+        certifications: [],
+    }
+    try {
+        data = JSON.parse(JSON.parse(useLocation().state).data);
+        //const data = useLocation().state
+        console.log(data)
+    } catch (e) {
+
+    } finally {
+    }
 
 
     const navigate = useNavigate();
 
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
-        user: {first_name : data.first_name, middle_name: data.middle_name, last_name : data.last_name, email : data.email, contact_no: data.contact_no},
+        user: {first_name : data.first_name || "", middle_name: data.middle_name || "", last_name : data.last_name || "", email : data.email || "", contact_no: data.contact_no || ""},
         education: data.education || [{}],
         experience: data.experience || [{}],
         skills: data.skills || [],
