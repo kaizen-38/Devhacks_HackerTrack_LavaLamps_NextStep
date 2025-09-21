@@ -3,11 +3,12 @@ from parser.extractor import parse_resume
 from neo4j_handler import Neo4jHandler
 import os
 from dotenv import load_dotenv 
+import requests 
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 
 app = Flask(__name__, template_folder="templates")
-
+langflow_api_key = os.getenv("langflow_Courses")
 # connect to AuraDB
 neo4j = Neo4jHandler(
     uri=os.getenv("uri"),
@@ -53,6 +54,57 @@ def submit_resume():
     handler.close()
 
     return jsonify({"message": "Resume successfully inserted", "career_path": career_path})
+
+@app.route("/course_suggestions", methods=["POST"])
+def course_suggestions():
+    try:
+        user_input = request.json.get("query", "Suggest me some courses")
+        flow_id = "baa053aa-6038-43f9-8707-f46e2ee2ff20"  # your flow
+        url = f"http://localhost:7860/api/v1/run/{flow_id}?stream=false"
+        headers = {
+            "Content-Type": "application/json",
+            "x-api-key": langflow_api_key
+        }
+
+        payload = {
+            "output_type": "chat",
+            "input_type": "chat",
+            "input_value": user_input
+        }
+
+        response = requests.post(url, headers=headers, json=payload)
+        response.raise_for_status()
+
+        return jsonify(response.json())
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+@app.route("/job_search", methods=["POST"])
+def job_search():
+    try:
+        user_input = request.json.get("query", "Find me some jobs")
+        flow_id = "c842e250-da8e-45e4-9614-5748c1646a31"  # job search flow
+        url = f"http://localhost:7860/api/v1/run/{flow_id}?stream=false"
+
+        headers = {
+            "Content-Type": "application/json",
+            "x-api-key": langflow_api_key
+        }
+
+        payload = {
+            "output_type": "chat",
+            "input_type": "chat",
+            "input_value": user_input
+        }
+
+        response = requests.post(url, headers=headers, json=payload)
+        response.raise_for_status()
+
+        return jsonify(response.json())
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
